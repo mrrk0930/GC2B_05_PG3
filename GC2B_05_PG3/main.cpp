@@ -1,5 +1,6 @@
 #include<iostream>
 #include<Windows.h>
+#include<stdio.h>
 
 int main() 
 {
