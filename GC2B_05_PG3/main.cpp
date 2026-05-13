@@ -10,14 +10,14 @@ typedef void (*PFunc)(int*);
 void Win(int* sum)
 {
 	printf("\nサイコロの目の和 : %d\n", *sum);
-	printf("結果 : 勝ち\n");
+	printf("結果 : 正解\n");
 }
 
 // 負け
 void Lose(int* sum)
 {
 	printf("\nサイコロの目の和 : %d\n", *sum);
-	printf("結果 : 負け\n");
+	printf("結果 : 不正解\n");
 }
 
 // 入力
