@@ -65,7 +65,7 @@ PFunc Judge(int player, int sum)
 
 void setTimeout(PFunc p, int second, int* sum)
 {
-	printf("\nサイコロを振っています...\n");
+	printf("\nサイコロを振っています....\n");
 
 	
 	Sleep(second * 1000);
