@@ -46,7 +46,7 @@ int main()
 		printf("\n通常日収 合計 = %d\n", noTotal);
 		printf("再帰日収 合計 = %d\n", reTotal + 100);
 
-		printf("------------------\n");
+		printf("-------------------\n");
 	}
 
 	
