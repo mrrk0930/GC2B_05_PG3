@@ -2,34 +2,54 @@
 #include<Windows.h>
 #include<stdio.h>
 
-template<typename Type>
-Type Min(Type a, Type b)
+int Recursive(int n, int count)
 {
-	return (a < b) ? a : b;
+	
+	if (count <= 0)
+	{
+		return n;
+	}
+
+	
+	int next = n * 2 - 50;
+
+	
+	return Recursive(next, count - 1);
 }
-
-template<>
-char Min<char>(char a, char b)
-{
-
-
-	printf("数字以外は代入できません\n");
-	return '\0';
-
-}
-
-
-
 
 int main()
 {
-
 	SetConsoleOutputCP(65001);
-	printf("%d\n", Min<int>(114, 514));
-	printf("%f\n", Min<float>(11.4f, 51.4f));
-	printf("%lf\n", Min<double>(11.4567, 51.4567));
-	printf("%c\n", Min<char>('1', '5'));
 
+	int n = 1072;
+
+	int reN = 100;
+	int count = 7;
+
+	int noTotal = 0;
+	int reTotal = 0;
+
+	
+	for (int i = 1; i <= count; i++)
+	{
+		int time = i + 1;
+
+
+	
+		int reResult = Recursive(reN, i);
+
+		
+		noTotal = n * time;
+		reTotal += reResult;
+
+		printf("%d時間勤務 = 時給%d\n", time, reResult);
+		printf("\n通常日収 合計 = %d\n", noTotal);
+		printf("再帰日収 合計 = %d\n", reTotal + 100);
+
+		printf("------------------\n");
+	}
+
+	
 
 	return 0;
 }
