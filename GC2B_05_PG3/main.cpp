@@ -2,54 +2,58 @@
 #include<Windows.h>
 #include<stdio.h>
 
-int Recursive(int n, int count)
+int add(int a, int b) 
 {
-	
-	if (count <= 0)
-	{
-		return n;
-	}
 
-	
-	int next = n * 2 - 50;
+	return a + b;
 
-	
-	return Recursive(next, count - 1);
+}
+
+int sub(int a, int b)
+{
+
+	return a - b;
+
+}
+
+typedef void (*PFunc)(int*);
+
+void DispResult(int* s) 
+{
+
+	printf("%d秒\n", *s);
+
+}
+
+void setTimeout(PFunc p, int second) 
+{
+
+	Sleep(second * 1000);
+
+	p(&second);
+
 }
 
 int main()
 {
 	SetConsoleOutputCP(65001);
 
-	int n = 1072;
+	int l = 100;
+	int h = 200;
 
-	int reN = 100;
-	int count = 7;
+	int (*calc)(int, int);
 
-	int noTotal = 0;
-	int reTotal = 0;
+	calc = add;
+	printf("%d\n", calc(l, h));
 
-	
-	for (int i = 1; i <= count; i++)
-	{
-		int time = i + 1;
+	calc = sub;
+	printf("%d\n", calc(l, h));
 
+	printf("\nstart\n");
 
-	
-		int reResult = Recursive(reN, i);
-
-		
-		noTotal = n * time;
-		reTotal += reResult;
-
-		printf("%d時間勤務 = 時給%d\n", time, reResult);
-		printf("\n通常日収 合計 = %d\n", noTotal);
-		printf("再帰日収 合計 = %d\n", reTotal + 100);
-
-		printf("--------------------\n");
-	}
-
-	
+	PFunc p;
+	p = DispResult;
+	setTimeout(p, 5);
 
 	return 0;
 }
