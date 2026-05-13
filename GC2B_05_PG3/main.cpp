@@ -29,7 +29,12 @@ int main()
 	int noTotal = 0;
 	int reTotal = 0;
 
-	
+	printf("1時間勤務 = 時給100\n");
+	printf("\n通常日収 合計 = 1072\n");
+	printf("再帰日収 合計 = 100\n");
+
+	printf("-------------------\n");
+
 	for (int i = 1; i <= count; i++)
 	{
 		int time = i + 1;
