@@ -81,37 +81,31 @@ int main(int argc, const char* argv[])
 	//丁半判定
 	PFunc resultFunc;
 
-	auto Judge = [&](int player, int sum)
-	
-    {
-
-			//丁
+	//
+	auto Judge = [&](int sum)
+		{
+			// 丁
 			if (player == 0)
 			{
-				
 				if (sum % 2 == 0)
 				{
-					
 					return +Win;
-				
 				}
 
 				return +Lose;
-			
 			}
 
-			//半
+			// 半
 			if (sum % 2 != 0)
 			{
-
 				return +Win;
-			
 			}
 
 			return +Lose;
-	};
+		};
 
-	resultFunc = Judge(player, sum);
+	//
+	resultFunc = Judge(sum);
 
 	//遅延実行
 	setTimeout(resultFunc, 3, &sum);
