@@ -35,7 +35,6 @@ private:
 
 	
 	// 接近
-	
 	void Approach()
 	{
 		printf("敵が接近しています\n");
