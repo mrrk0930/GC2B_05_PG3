@@ -55,7 +55,6 @@ int main()
 	// float + double
 	MinClass<float, double> f(4.2f, 8.9);
 
-	
 	printf("int,int       : %f\n", a.Min());
 	printf("float,float   : %f\n", b.Min());
 	printf("double,double : %f\n", c.Min());
