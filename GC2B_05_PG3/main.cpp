@@ -4,66 +4,112 @@
 
 using namespace std;
 
-template<typename T1, typename T2>
 
-class MinClass
+class Enemy
 {
-
 public:
 
-	T1 value1;
-	T2 value2;
-
-	MinClass(T1 v1, T2 v2) : value1(v1), value2(v2){}
-
-	double Min()
+	// 状態
+	enum class Phase
 	{
+		Approach, // 接近
+		Shot,     // 射撃
+		Leave     // 離脱
+	};
 
-		if (value1 < value2)
-		{
-
-			return value1;
-		
-		}
-
-		return value2;
-	
+	// コンストラクタ
+	Enemy()
+	{
+		phase_ = Phase::Approach;
+		timer_ = 0;
 	}
 
+	// 更新
+	void Update()
+	{
+
+		(this->*spFuncTable[static_cast<size_t>(phase_)])();
+	}
+
+private:
+
+
+	// 接近
+	void Approach()
+	{
+		printf("敵が接近しています\n");
+
+		timer_++;
+
+
+		if (timer_ >= 1)
+		{
+			timer_ = 0;
+			phase_ = Phase::Shot;
+		}
+	}
+
+
+	// 射撃
+
+	void Shot()
+	{
+		printf("敵が射撃しています\n");
+
+		timer_++;
+
+
+		if (timer_ >= 1)
+		{
+			timer_ = 0;
+			phase_ = Phase::Leave;
+		}
+	}
+
+
+	// 離脱
+
+	void Leave()
+	{
+		printf("敵が離脱しています\n");
+
+		timer_++;
+	}
+
+private:
+
+
+	Phase phase_;
+
+
+	int timer_;
+
+
+	static void (Enemy::* spFuncTable[])();
 };
+
+
+void (Enemy::* Enemy::spFuncTable[])() =
+{
+	&Enemy::Approach, // 接近
+	&Enemy::Shot,     // 射撃
+	&Enemy::Leave     // 離脱
+};
+
 
 int main()
 {
-	
 	SetConsoleOutputCP(65001);
 
-	// int + int
-	MinClass<int, int> a(10, 20);
+	Enemy enemy;
 
-	// float + float
-	MinClass<float, float> b(1.5f, 3.2f);
 
-	// double + double
-	MinClass<double, double> c(5.8, 2.4);
+	for (int i = 0; i < 3; i++)
+	{
+		enemy.Update();
 
-	// int + float
-	MinClass<int, float> d(10, 2.5f);
-
-	// int + double
-	MinClass<int, double> e(7, 9.8);
-
-	// float + double
-	MinClass<float, double> f(4.2f, 8.9);
-
-	
-	printf("int,int       : %f\n", a.Min());
-	printf("float,float   : %f\n", b.Min());
-	printf("double,double : %f\n", c.Min());
-
-	printf("\nint,float     : %f\n", d.Min());
-	printf("int,double    : %f\n", e.Min());
-	printf("float,double  : %f\n", f.Min());
+		Sleep(1000);
+	}
 
 	return 0;
-
 }
