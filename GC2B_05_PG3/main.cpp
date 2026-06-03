@@ -1,63 +1,54 @@
 #include <iostream>
 #include <Windows.h>
 #include <stdio.h>
-#include "Animal.h"
-#include "Dog.h"
-#include "Cat.h"
+#include "IShape.h"
+#include "Circle.h"
+#include "Rectangle.h"
+
 using namespace std;
-
-
 
 int main()
 {
 
 	SetConsoleOutputCP(65001);
 
-	Animal* animals[2];
+	float radius;
+	float width;
+	float height;
 
-	// 生成フェーズ
-	printf("--生成フェーズ--\n");
-	printf("動物達がいる\n");
+	printf("-- 円 --\n");
+	printf("円の半径を入力してください : ");
+	scanf_s("%f", &radius);
 
-	for (int i = 0; i < 2; i++)
-	{
+	printf("\n-- 矩形 --\n");
+	printf("矩形の幅を入力してください : ");
+	scanf_s("%f", &width);
 
-		if (i == 0)
-		{
-			
-			animals[i] = new Dog;
-		
-		}
-		else
-		{
-			
-			animals[i] = new Cat;
-		
-		}
-	
-	}
+	printf("矩形の高さを入力してください : ");
+	scanf_s("%f", &height);
 
-	// 鳴き声フェーズ
-	printf("\n--鳴き声フェーズ--\n");
+	IShape* shapes[2];
 
-	Animal animal;
-	animal.Cry();
+	shapes[0] = new Circle(radius);
+	shapes[1] = new Rectngle(width, height);
+
+	printf("\n-- 面積計算 --\n");
 
 	for (int i = 0; i < 2; i++)
 	{
 		
-		animals[i]->Cry();
+		shapes[i]->Size();
+		shapes[i]->Draw();
 	
 	}
-
-	// いなくなるフェーズ
-	printf("\n--いなくなるフェーズ--\n");
 
 	for (int i = 0; i < 2; i++)
 	{
-		
-		delete animals[i];
+	
+		delete shapes[i];
 	
 	}
-	printf("動物達がいなくなった\n");
+
+	return 0;
+
 }
