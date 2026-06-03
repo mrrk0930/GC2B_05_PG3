@@ -1,5 +1,4 @@
 #pragma once
-
 #include "IShape.h"
 
 class Rectngle : public IShape
