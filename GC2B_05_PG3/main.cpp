@@ -1,53 +1,97 @@
 #include <iostream>
 #include <Windows.h>
-#include <stdio.h>
-#include "IShape.h"
-#include "Circle.h"
-#include "Rectangle.h"
+#include <list>
 
 using namespace std;
+
+void PrintStations(const list<const char*>& stations, int year)
+{
+
+	printf("===== %d =====\n", year);
+
+	for (const char* station : stations)
+	{
+		
+		printf(" %s\n", station);
+
+	}
+
+	printf("\n");
+
+}
 
 int main()
 {
 
 	SetConsoleOutputCP(65001);
 
-	float radius;
-	float width;
-	float height;
+	list<const char*> yamanote1970 =
+	{
+		"Tokyo",
+		"Kanda",
+		"Akihabara",
+		"Okachimachi",
+		"Ueno",
+		"Uguisudani",
+		"Nippori",
+		"Tabata",
+		"Komagome",
+		"Sugamo",
+		"Otsuka",
+		"Ikebukuro",
+		"Mejiro",
+		"Takadanobaba",
+		"Shin-Okubo",
+		"Shinjuku",
+		"Yoyogi",
+		"Harajuku",
+		"Shibuya",
+		"Ebisu",
+		"Meguro",
+		"Gotanda",
+		"Osaki",
+		"Shinagawa",
+		"Tamachi",
+		"Hamamatsucho",
+		"Shimbashi",
+		"Yurakucho"
+	};
 
-	printf("-- 円 --\n");
-	printf("円の半径を入力してください : ");
-	scanf_s("%f", &radius);
+	PrintStations(yamanote1970, 1970);
 
-	printf("\n-- 矩形 --\n");
-	printf("矩形の幅を入力してください : ");
-	scanf_s("%f", &width);
+	list<const char*> yamanote2019 = yamanote1970;
 
-	printf("矩形の高さを入力してください : ");
-	scanf_s("%f", &height);
-
-	IShape* shapes[2];
-
-	shapes[0] = new Circle(radius);
-	shapes[1] = new Rectngle(width, height);
-
-	printf("\n-- 面積計算 --\n");
-
-	for (int i = 0; i < 2; i++)
+	for (auto it = yamanote2019.begin(); it != yamanote2019.end(); ++it)
 	{
 		
-		shapes[i]->Size();
-		shapes[i]->Draw();
+		if (*it == "Tabata")
+		{
+
+			yamanote2019.insert(it, "Nishi-Nippori");
+			break;
+
+		}
+
+	}
+
+	PrintStations(yamanote2019, 2019);
+
+	list<const char*> yamanote2022 = yamanote2019;
+
+	for (auto it = yamanote2022.begin(); it != yamanote2022.end(); ++it)
+	{
+
+		if (*it == "Tamachi")
+		{
+
+			yamanote2022.insert(it, "Takanawa Gateway");
+			break;
+		
+		}
 	
 	}
 
-	for (int i = 0; i < 2; i++)
-	{
-	
-		delete shapes[i];
-	
-	}
+	PrintStations(yamanote2022, 2022);
 
 	return 0;
 
