@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <Windows.h>
+
 
 using namespace std;
 
@@ -9,38 +11,36 @@ int main()
 
     SetConsoleOutputCP(65001);
     
-    string a(1000000, 'a');
+	string a(1000000, 'a');
 
-    
-    auto start_copy = chrono::high_resolution_clock::now();
+	
+	auto start_copy = chrono::high_resolution_clock::now();
 
-    string b = a;   
+	string b = a;	
 
-    auto end_copy = chrono::high_resolution_clock::now();
+	auto end_copy = chrono::high_resolution_clock::now();
 
-    auto copy_time =
-        chrono::duration_cast<chrono::microseconds>(end_copy - start_copy).count();
+	auto copy_duration =
+		chrono::duration_cast<chrono::microseconds>(end_copy - start_copy).count();
+
+	auto start_move = chrono::high_resolution_clock::now();
+
+	string c = std::move(a);	
+
+	auto end_move = chrono::high_resolution_clock::now();
+
+	auto move_duration =
+		chrono::duration_cast<chrono::microseconds>(end_move - start_move).count();
 
 
-    auto start_move = chrono::high_resolution_clock::now();
+	cout << "1,000,000文字のコピーと移動を比較しました。" << endl;
+	cout << "コピー : " << copy_duration << " μs" << endl;
+	cout << "移動 : " << move_duration << " μs" << endl;
 
-    string c = move(a);  
+	// 終了待機
+	cout << endl;
+	cout << "何かキーを押してください...";
+	cin.get();
 
-    auto end_move = chrono::high_resolution_clock::now();
-
-    auto move_time =
-        chrono::duration_cast<chrono::microseconds>(end_move - start_move).count();
-
-    
-    cout << "1,000,000文字のstd::stringを比較しました。" << endl;
-    cout << endl;
-
-    cout << "コピー : " << copy_time << " μs" << endl;
-    cout << "ムーブ : " << move_time << " μs" << endl;
-
-    cout << endl;
-    cout << "何かキーを押してください...";
-    cin.get();
-
-    return 0;
+	return 0;
 }
