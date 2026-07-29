@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
+
+    SetConsoleOutputCP(65001);
     
     string a(1000000, 'a');
 
