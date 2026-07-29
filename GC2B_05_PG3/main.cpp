@@ -14,6 +14,7 @@ int main()
 	string a(1000000, 'a');
 
 	
+
 	auto start_copy = chrono::high_resolution_clock::now();
 
 	string b = a;	
